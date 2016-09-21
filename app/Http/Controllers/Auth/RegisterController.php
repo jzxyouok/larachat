@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Webpatser\Uuid\Uuid;
 
 class RegisterController extends Controller
 {
@@ -63,7 +64,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'id' => Uuid::generate(4),
+            'name' => ucwords($data['name']),
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);

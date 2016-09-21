@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\UuidModel;
+use App\User;
 
 class AppServiceProvider extends ServiceProvider
 {

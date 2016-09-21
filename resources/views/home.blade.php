@@ -11,6 +11,7 @@
             margin-bottom: 8px;
             overflow: scroll;
             padding: 5px;
+            overflow-x: hidden;
         }
     </style>
     <div class="container spark-screen">
