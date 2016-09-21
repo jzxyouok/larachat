@@ -1,9 +1,10 @@
 <?php
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('home');
+    return redirect()->route('home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
