@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-    {{--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>--}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <style type="text/css">
