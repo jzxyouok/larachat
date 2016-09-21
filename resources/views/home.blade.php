@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">LaraChat Message</div>
+                    <div class="panel-heading">LaraChat</div>
                     <div class="panel-body">
 
                         <div class="row">
