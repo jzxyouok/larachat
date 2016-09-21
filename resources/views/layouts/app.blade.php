@@ -12,9 +12,23 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <style type="text/css">
+        #messages {
+            border: 1px solid black;
+            height: 300px;
+            margin-bottom: 8px;
+            /*overflow: scroll;*/
+            padding: 5px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    </style>
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>--}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -82,5 +96,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    {{--<script src="/js/jquery.nanoscroller.min.js"></script>--}}
 </body>
 </html>

@@ -1,25 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <style type="text/css">
-        #messages {
-            border: 1px solid black;
-            height: 300px;
-            margin-bottom: 8px;
-            overflow: scroll;
-            padding: 5px;
-            overflow-x: hidden;
-        }
-    </style>
     <div class="container spark-screen">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">LaraChat</div>
                     <div class="panel-body">
-
                         <div class="row">
                             <div class="col-lg-8">
                                 <div id="messages"></div>
