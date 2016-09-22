@@ -7,6 +7,8 @@ server.listen(8890);
 io.on('connection', function (socket) {
 
     console.log("client connected");
+
+// message channel
     var redisClient = redis.createClient();
     redisClient.subscribe('message');
 
@@ -14,6 +16,8 @@ io.on('connection', function (socket) {
         console.log("mew message add in queue " + data['message'] + " channel");
         socket.emit(channel, data);
     });
+
+    // friend channel
 
     socket.on('disconnect', function () {
         redisClient.quit();
