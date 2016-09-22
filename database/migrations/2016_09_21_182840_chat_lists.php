@@ -15,9 +15,9 @@ class ChatLists extends Migration
     {
          Schema::create('chat_lists', function (Blueprint $table) {
              $table->string('id');
-             $table->uuid('message_id');
-             $table->uuid('user_id');
-             $table->boolean('status');
+             $table->uuid('message_id')->nullable();
+             $table->uuid('user_id')->nullable();
+             $table->boolean('status')->nullable();
              $table->timestamp('created_at')->nullable();
          });
     }

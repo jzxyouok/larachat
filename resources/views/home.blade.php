@@ -58,7 +58,7 @@
                                                  src="assets/img/user.png"/>
                                         </a>
                                         <div class="media-body">
-                                            <h5>Alex Deo | User </h5>
+                                            <h5>{{ Auth::user()->name }}</h5>
                                             <small class="text-muted">Active From 3 hours</small>
                                         </div>
                                     </div>
@@ -72,29 +72,4 @@
         </div>
     </div>
 
-    <!-- <div class="container spark-screen">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">LaraChat</div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div id="messages"></div>
-                            </div>
-                            <div class="col-lg-8">
-                                <form action="sendmessage" method="POST">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="hidden" name="user" value="{{ Auth::user()->name }}">
-                                    <textarea class="form-control msg"></textarea>
-                                    <br/>
-                                    <input type="button" value="Send" class="btn btn-success send-msg">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 @endsection

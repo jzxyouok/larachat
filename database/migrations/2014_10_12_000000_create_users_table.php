@@ -17,10 +17,10 @@ class CreateUsersTable extends Migration
             $table->uuid('id');
             $table->string('name')->unique();
             $table->string('email')->unique();
-            $table->string('p_dir');
-            $table->string('p_filename');
-            $table->string('user_status');
-            $table->boolean('online');
+            $table->string('p_dir')->nullable();
+            $table->string('p_filename')->nullable();
+            $table->string('user_status')->nullable();
+            $table->boolean('online')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

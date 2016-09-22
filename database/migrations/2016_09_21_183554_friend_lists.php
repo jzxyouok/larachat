@@ -15,9 +15,9 @@ class FriendLists extends Migration
     {
          Schema::create('friend_lists', function (Blueprint $table) {
              $table->increments('id');
-             $table->uuid('user_id');
-             $table->uuid('user_id_friend');
-             $table->boolean('are_friend');
+             $table->uuid('user_id')->nullable();
+             $table->uuid('user_id_friend')->nullable();
+             $table->boolean('are_friend')->nullable();
              $table->timestamp('created_at')->nullable();
          });
     }
