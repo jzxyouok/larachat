@@ -104,7 +104,8 @@
             data = jQuery.parseJSON(data);
             console.log(data.user);
             $("#messages").append("<a class='pull-left' href='#'><img class='media-object img-circle' src='http://www.patrasevents.gr/imgsrv/f/100x67/1846394.jpg' /></a>" +
-                    "<div class='media-body'><strong>" + data.user + ":</strong><p>" + data.message + "</p><br/><small id='info' class='text-muted'>Alex Deo | 23rd June at 5:00pm</small><hr /></div>");
+                    "<div class='media-body'><strong>" + data.user + ":</strong><p>" + data.message + "</p><br/>" +
+                    "<small id='info' class='text-muted'>Alex Deo | 23rd June at 5:00pm</small><hr /></div>");
         });
 
         $(function () {
