@@ -8,7 +8,7 @@ io.on('connection', function (socket) {
 
     console.log("client connected");
 
-// message channel
+    // message channel
     var redisClient = redis.createClient();
     redisClient.subscribe('message');
 
