@@ -14,7 +14,7 @@
     <link href="/css/app.css" rel="stylesheet">
     <style type="text/css">
         #messages {
-            border: 1px solid black;
+            border: 0px solid black;
             height: 300px;
             margin-bottom: 8px;
             /*overflow: scroll;*/

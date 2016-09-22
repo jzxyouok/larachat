@@ -13,13 +13,13 @@ class FriendLists extends Migration
      */
     public function up()
     {
-        Schema::create('friend_lists', function (Blueprint $table) {
-            $table->increments('id');
-            $table->uuid('user_id');
-            $table->uuid('user_id_friend');
-            $table->boolean('are_friend');
-            $table->timestamp('created_at')->nullable();
-        });
+        // Schema::create('friend_lists', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->uuid('user_id');
+        //     $table->uuid('user_id_friend');
+        //     $table->boolean('are_friend');
+        //     $table->timestamp('created_at')->nullable();
+        // });
     }
 
     /**
