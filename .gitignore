@@ -6,3 +6,4 @@ Homestead.json
 Homestead.yaml
 .env
 requirement.txt
+composer.lock
