@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">LaraChat</div>
+                    <div class="panel-heading">Messages</div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-8">
@@ -25,13 +25,15 @@
             </div>
         </div>
     </div>
-    <script>
-        var socket = io.connect('http://127.0.0.1:8890');
-        socket.on('message', function (data) {
-            data = jQuery.parseJSON(data);
-            console.log(data.user);
-            $("#messages").append("<strong>" + data.user + ":</strong><p>" + data.message + "</p>");
-        });
+<script>
+    var socket = io.connect('http://127.0.0.1:8890');
+    socket.on('message', function (data) {
+        data = jQuery.parseJSON(data);
+        console.log(data.user);
+        $("#messages").append("<strong>" + data.user + ":</strong><p>" + data.message + "</p>");
+    });
+
+    $(function () {
 
         $(".send-msg").click(function (e) {
             e.preventDefault();
@@ -53,5 +55,7 @@
                 alert("Please Add Message.");
             }
         })
-    </script>
+
+    })
+</script>
 @endsection
