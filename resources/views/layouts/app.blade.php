@@ -96,6 +96,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
-    {{--<script src="/js/jquery.nanoscroller.min.js"></script>--}}
+    <script src="/js/script.js"></script>
 </body>
 </html>

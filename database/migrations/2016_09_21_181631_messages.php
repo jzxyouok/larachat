@@ -13,23 +13,25 @@ class Messages extends Migration
      */
     public function up()
     {
-    //     Schema::create('messages', function (Blueprint $table) {
-    //         $table->uuid('id');
-    //         $table->uuid('user_id');
-    //         $table->boolean('status');
-    //         $table->text('data');
-    //         $table->string('media_url');
-    //         $table->string('media_mime_type');
-    //         $table->string('media_size');
-    //         $table->string('media_name');
-    //         $table->string('media_dir');
-    //         $table->timestampTz('received_timestamp');
-    //         $table->timestampTz('send_timestamp');
-    //         $table->timestampTz('receipt_server_timestamp');
-    //         $table->timestampTz('receipt_device_timestamp');
-    //         $table->timestamps();
-    //         $table->primary('id');
-    //     });
+         Schema::create('messages', function (Blueprint $table) {
+             $table->uuid('id');
+             $table->uuid('user_id');
+             $table->uuid('from_id');
+             $table->uuid('to_id');
+             $table->boolean('status');
+             $table->text('data');
+             $table->string('media_url');
+             $table->string('media_mime_type');
+             $table->string('media_size');
+             $table->string('media_name');
+             $table->string('media_dir');
+             $table->timestampTz('received_timestamp')->nullable();
+             $table->timestampTz('send_timestamp')->nullable();
+             $table->timestampTz('receipt_server_timestamp')->nullable();
+             $table->timestampTz('receipt_device_timestamp')->nullable();
+             $table->timestamps();
+             $table->primary('id');
+         });
     }
 
     /**

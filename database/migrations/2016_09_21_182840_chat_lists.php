@@ -13,13 +13,13 @@ class ChatLists extends Migration
      */
     public function up()
     {
-        // Schema::create('chat_lists', function (Blueprint $table) {
-        //     $table->string('id');
-        //     $table->uuid('message_id');
-        //     $table->uuid('user_id');
-        //     $table->boolean('status');
-        //     $table->timestamp('created_at')->nullable();
-        // });
+         Schema::create('chat_lists', function (Blueprint $table) {
+             $table->string('id');
+             $table->uuid('message_id');
+             $table->uuid('user_id');
+             $table->boolean('status');
+             $table->timestamp('created_at')->nullable();
+         });
     }
 
     /**
