@@ -9,17 +9,17 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class EventChat extends Event implements ShouldBroadcast
+class ChatMessageWasReceived
 {
     use InteractsWithSockets, SerializesModels;
 
-    public $data;
+    public $chatMessage;
+    public $user;
 
-    public function __construct()
+    public function __construct($chatMessage, $user)
     {
-        $this->data = [
-            'power'=> '10'
-        ];
+        $this->chatMessage = $chatMessage;
+        $this->user = $user;
     }
 
     /**

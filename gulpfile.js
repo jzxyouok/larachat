@@ -1,6 +1,6 @@
 const elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue');
+// require('laravel-elixir-vue');
 
 /*
  |--------------------------------------------------------------------------
@@ -13,7 +13,22 @@ require('laravel-elixir-vue');
  |
  */
 
-elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+// elixir(function (mix) {
+//     mix.scripts([
+//         'vendor/vue.min.js',
+//         'vendor/vue-resource.min.js',
+//     ], 'public/js/vendor.js')
+// });
+elixir(function (mix) {
+    mix.scripts([
+        'bootstrap.js',
+        'vendor/vue.min.js',
+        'vendor/vue-resource.min.js',
+    ], 'public/js/app.js')
 });
+elixir(function(mix) {
+    mix.browserify('app.js');
+});
+// elixir(function(mix) {
+//     mix.version(['css/app.css', 'js/app.js']);
+// });

@@ -25,10 +25,6 @@ class Messages extends Migration
              $table->string('media_size')->nullable();
              $table->string('media_name')->nullable();
              $table->string('media_dir')->nullable();
-             $table->timestampTz('received_timestamp')->nullable();
-             $table->timestampTz('send_timestamp')->nullable();
-             $table->timestampTz('receipt_server_timestamp')->nullable();
-             $table->timestampTz('receipt_device_timestamp')->nullable();
              $table->timestamps();
              $table->primary('id');
          });

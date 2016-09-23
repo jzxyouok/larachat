@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Kuala_Lumpur',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +162,11 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+//        Collective\Html\HtmlServiceProvider::class,
+//        Laracasts\Flash\FlashServiceProvider::class,
+//        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+//        \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
+//        \InfyOm\CoreTemplates\CoreTemplatesServiceProvider::class,
 
         /*
          * Package Service Providers...
