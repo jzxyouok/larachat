@@ -61,7 +61,6 @@
                                             <h5>Din</h5>
                                             <small v-if="isOnline" class="text-muted">Online</small>
                                             <small v-else class="text-muted">Offline</small>
-                                            <button v-on:click="getMessage">getMessage</button>
                                         </div>
                                     </div>
                                 </div>

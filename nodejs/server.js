@@ -21,7 +21,8 @@ io.on('connection', function (socket) {
     redisClient.subscribe('message');
 
     redisClient.on("message", function (channel, data) {
-        console.log("mew message add in queue " + data['message'] + " channel");
+        console.log("mew message add in queue " + data + " channel");
+        console.log(channel);
         socket.emit(channel, data);
     });
 
@@ -66,8 +67,8 @@ io.on('connection', function (socket) {
     socket.on('disconnect', function () {
         clearInterval(ChatController.init());
         clearInterval(ChatController.getChat());
-        redisClient.quit();
         console.log('disconnect');
+        redisClient.quit();
     });
 
 });
