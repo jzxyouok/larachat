@@ -1,12 +1,12 @@
 $(function () {
 
     var socket = io.connect('http://127.0.0.1:8890');
-    // socket.on('time', function (datas) {
-    //     console.log(datas.toString());
-    // });
-    // socket.on('friendsChat', function (datas) {
-    //     console.log(datas.toString());
-    // });
+    socket.on('time', function (datas) {
+        console.log(datas.toString());
+    });
+    socket.on('friendsChat', function (datas) {
+        console.log(datas.toString());
+    });
     socket.on('message', function (data) {
         data = jQuery.parseJSON(data);
         // console.log(data);
