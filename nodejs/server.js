@@ -27,7 +27,7 @@ ChatController = function(socks) {
         var strTime = hours + ':' + minutes + ':' + sec + ' ' + ampm;
         return strTime;
     };
-    var init= function () {
+    self.init= function () {
         socket.on('disconnect',function(e){
            self.close();
         });
@@ -37,7 +37,7 @@ ChatController = function(socks) {
         socket.on('getChat',function(){
             self.getChat();
         });
-        redis.set('online',);
+        // redis.set('online', 'hi');
     };
 
     self.getUser= function () {
