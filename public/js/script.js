@@ -12,7 +12,7 @@ new Vue({
     data: {
         messages: [],
         newMessage: "",
-        token: document.querySelector('meta[role=token]').content,
+        token: document.querySelector('meta[name=csrf-token]').content,
         userId: null,
         rooms: [],
         room: "default_room",
@@ -69,7 +69,7 @@ new Vue({
                     that.changeRoom(0);
                     that.notifications.push({
                         author: { name: 'System' },
-                        message: 'К сожалению, комната в которой вы находитесь удалена. ' + 'Вы перенаправлены в комнату по умолчанию'
+                        message: 'Unfortunately, the room in which you are removed. ' + 'You will be redirected to the default room'
                     });
                     that.initCloseAlertTriggers();
                 }
