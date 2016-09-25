@@ -24,6 +24,9 @@ elixir(function (mix) {
         'bootstrap.js',
         'vendor/vue.min.js',
         'vendor/vue-resource.min.js',
+        'vendor/jquery.min.js',
+        'vendor/jquery-migrate-1.2.1.min.js',
+        'vendor/socket.io-1.4.5.js'
     ], 'public/js/app.js')
 });
 elixir(function(mix) {

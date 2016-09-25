@@ -25,9 +25,9 @@
     </style>
 
     <!-- Scripts -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    {{--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>--}}
+    {{--<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>--}}
+    {{--<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>--}}
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -95,6 +95,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/socket.io-1.4.5.js"></script>
     <script src="/js/vendor.js"></script>
     <script src="/js/script.js"></script>
 </body>
