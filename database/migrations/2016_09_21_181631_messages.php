@@ -14,17 +14,12 @@ class Messages extends Migration
     public function up()
     {
          Schema::create('messages', function (Blueprint $table) {
+//             $table->increments('id');
              $table->uuid('id');
-             $table->uuid('user_id')->nullable();
-             $table->uuid('from_id')->nullable();
-             $table->uuid('to_id')->nullable();
-             $table->boolean('status')->nullable();
-             $table->text('data')->nullable();
-             $table->string('media_url')->nullable();
-             $table->string('media_mime_type')->nullable();
-             $table->string('media_size')->nullable();
-             $table->string('media_name')->nullable();
-             $table->string('media_dir')->nullable();
+             $table->integer('user_id', $AI = false, $unsigned = true);
+             $table->text('message');
+             $table->integer('room_id');
+             $table->integer('to', $AI = false, $unsigned = true);
              $table->timestamps();
              $table->primary('id');
          });

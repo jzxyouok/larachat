@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
-    <div id="appkini" class="container" xmlns:v-on="http://www.w3.org/1999/xhtml">
+    <div id="appkini" class="container">
         <div class="row " style="padding-top:40px;">
             <div class="col-md-8">
                 <div class="panel panel-info">
@@ -11,6 +10,9 @@
                             <li class="media">
                                 <div class="media-body">
                                     <div id="messages" class="media">
+                                        <ul id="messages">
+                                            <li v-for='message in messages'>${ message.text }</li>
+                                        </ul>
                                         {{--<div v-if=""></div>--}}
                                         {{--<div v-else=""></div>--}}
                                         {{--if friend true pull right else --}}
@@ -20,17 +22,19 @@
                         </ul>
                     </div>
                     <div class="panel-footer">
-                        <form action="sendmessage" method="POST">
+                        {{--<form action="sendmessage" method="POST">--}}
                             <div class="input-group">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="user" value="{{ Auth::user()->name }}">
-                                <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                <input type="text" class="form-control msg" placeholder="Enter Message"/>
+                                {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+                                {{--<input type="hidden" name="user" value="{{ Auth::user()->name }}">--}}
+                                {{--<input type="hidden" name="id" value="{{ Auth::user()->id }}">--}}
+                                {{--<input type="text" class="form-control msg" placeholder="Enter Message"/>--}}
+                                <input v-model='input' id="m" autocomplete="off" type="text" class="form-control msg" placeholder="Enter Message"/>
                                 <span class="input-group-btn">
-                                 <input v-on:click="postMessage" class="btn btn-info send-msg" type="button" value="SEND"/>
+                                 {{--<input v-on:click="postMessage" class="btn btn-info send-msg" type="button" value="SEND"/>--}}
+                                 <input v-on:click="sendmsg" class="btn btn-info send-msg" type="button" value="SEND"/>
                                 </span>
                             </div>
-                        </form>
+                        {{--</form>--}}
                     </div>
                 </div>
             </div>
@@ -72,51 +76,6 @@
         </div>
     </div>
     <script>
-        var socket = null;
-
-        (function () {
-//            function connect() {
-//                if (socket !== null) {
-//                    return;
-//                }
-//
-//                socket = new WebSocket('ws://127.0.0.1:8890');
-//                if (window.WebSocket) {
-//                }
-//                socket.onopen = function() {
-//                    console.log('open socket');
-//                };
-//                socket.onmessage = function(e) {
-//                    var el = $('#output');
-//                    var m = JSON.parse(decodeURIComponent(e.data)).message;
-//                    el.val(m + '\n' + el.val());
-//                };
-//                socket.onclose = function(e) {
-//                    // e.reason ==> total.js client.close('reason message');
-//                    $('button[name="open"]').attr('disabled', false);
-//                };
-//            }
-
-            /////////////////////////////
-//            var host = "ws://localhost:80/websocket/server.php";
-//            try {
-//                socket = new WebSocket(host);
-//                log('WebSocket - status ' + socket.readyState);
-//                socket.onopen = function (msg) {
-//                    log("Welcome - status " + this.readyState);
-//                };
-//                socket.onmessage = function (msg) {
-//                    log("Received: " + msg.data);
-//                };
-//                socket.onclose = function (msg) {
-//                    log("Disconnected - status " + this.readyState);
-//                };
-//            } catch (ex) {
-//                log(ex);
-//            }
-            ///////////////////////////////
-
-        });
-
+    {{--window.session_id = "{{ Auth::user()->id }}";--}}
     </script>
 @endsection

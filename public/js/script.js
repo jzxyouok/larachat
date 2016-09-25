@@ -1,27 +1,26 @@
-$(function () {
-
+// $(function () {
     var socket = io.connect('http://127.0.0.1:8890');
-    socket.on('time', function (datas) {
-        console.log(datas.toString());
-    });
-    socket.on('friendsChat', function (datas) {
-        console.log(datas.toString());
-    });
-    socket.on('message', function (data) {
-        data = jQuery.parseJSON(data);
-        // console.log(data);
-
-        $("#messages").append("<a class='pull-left' href='#'><img class='media-object img-circle' src='http://www.patrasevents.gr/imgsrv/f/100x67/1846394.jpg' /></a>" +
-            "<div class='media-body'><strong>" + data.user + ":</strong><p>" + data.message + "</p><br/>" +
-            "<small id='info' class='text-muted'>"+ data.datetime +"</small><hr /></div>");
-
-    });
+    // socket.on('time', function (datas) {
+    //     console.log(datas.toString());
+    // });
+    // socket.on('friendsChat', function (datas) {
+    //     console.log(datas.toString());
+    // });
+    // socket.on('message', function (data) {
+    //     data = jQuery.parseJSON(data);
+    //     // console.log(data);
+    //
+    //     $("#messages").append("<a class='pull-left' href='#'><img class='media-object img-circle' src='http://www.patrasevents.gr/imgsrv/f/100x67/1846394.jpg' /></a>" +
+    //         "<div class='media-body'><strong>" + data.user + ":</strong><p>" + data.message + "</p><br/>" +
+    //         "<small id='info' class='text-muted'>"+ data.datetime +"</small><hr /></div>");
+    //
+    // });
 
     // $("#send-msg").click('click', function (e) {
     //     e.preventDefault();
     //
     // })
-})
+// })
 
 /*begin vue js*/
 Vue.config.delimiters = ['${', '}']
@@ -29,51 +28,174 @@ Vue.http.interceptors.push(function (request, next) {
     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
     next();
 });
-var appkini = new Vue({
-    el: '#appkini',
+
+var session = window.session_id;
+
+new Vue({
+    el: "#appkini",
     data: {
-        message: 'Hello Vue!',
-        counter: 0,
-        isOnline: true,
+        messages: [],
+        newMessage: "",
+        token: document.querySelector('meta[role=token]').content,
+        userId: null,
+        rooms: [],
+        room: "default_room",
+        notifications: [],
+        closeTriggers: document.querySelectorAll('.fout'),
+        showPrivateMessages: 0
     },
-    ready: function () {
-        this.token = $("input[name='_token']").val();
+
+    ready: function ready() {
+        this.loadMessages();
+        this.initListener();
+        this.loadRooms();
+        this.setUser();
     },
+
     methods: {
-        getMessage: function (e, id) {
+        sendMessage: function sendMessage(e) {
             e.preventDefault();
-            var token = $("input[name='_token']").val();
-            var id = $("input[name='id']").val();
-            $.post('/api/findmessage/' + id, {'_token': this.token}, function (data) {
-                console.log(data);
+            if (this.newMessage == "") return;
+            var that = this;
+
+            $.post('/messages', { _token: this.token, room_id: this.room, message: this.newMessage }).done(function () {
+                that.newMessage = "";
             });
         },
-        postMessage: function (e) {
-            e.preventDefault();
-            var user = $("input[name='user']").val();
-            var msg = $(".msg").val();
-            if (msg != '') {
-                jQuery.ajax({
-                    type: "POST",
-                    url: '/sendmessage',
-                    dataType: "json",
-                    data: {'_token': this.token, 'message': msg, 'user': user},
-                    success: function (data) {
-                        console.log(data);
-                        $(".msg").val('');
-                    }
+
+        answer: function answer(msg) {
+            this.newMessage = '#' + msg.author.name + ', ';
+            this.$els.input.focus();
+        },
+
+        initListener: function initListener() {
+            var that = this;
+
+            socket.on(that.room, function (msg) {
+                if (msg.room_id == that.room) {
+                    that.messages.push(msg);
+                } else if (msg.room != that.room && msg.to == that.user.id) {
+                    that.notifications.push(msg);
+                    that.initCloseAlertTriggers();
+                }
+                that.scrollBottom();
+            });
+
+            socket.on('messageHasBeenDeleted', function (msgId) {
+                var msg = _.findWhere(that.messages, { id: msgId });
+                that.messages.$remove(msg);
+            });
+
+            socket.on('roomHasBeenDeleted', function (roomId) {
+                var room = _.findWhere(that.rooms, { id: roomId });
+                that.rooms.$remove(room);
+                if (that.room == roomId) {
+                    that.changeRoom(0);
+                    that.notifications.push({
+                        author: { name: 'System' },
+                        message: 'К сожалению, комната в которой вы находитесь удалена. ' + 'Вы перенаправлены в комнату по умолчанию'
+                    });
+                    that.initCloseAlertTriggers();
+                }
+            });
+
+            socket.on('roomHasBeenCreated', function (room) {
+                that.rooms.push(room);
+            });
+        },
+
+        loadMessages: function loadMessages() {
+            var that = this;
+            $.ajax({
+                url: '/messages',
+                method: 'GET',
+                data: { room: that.room, showPrivate: that.showPrivateMessages },
+                cache: false
+            }).done(function (messages) {
+                that.messages = messages;
+            });
+        },
+
+        remove: function remove(msg) {
+            $.post('/messages/' + msg.id, { _token: this.token, _method: 'DELETE' }).done(function () {
+                socket.emit('delete', msg);
+            });
+        },
+
+        loadRooms: function loadRooms() {
+            var that = this;
+            $.ajax({
+                url: '/rooms',
+                method: 'GET'
+            }).done(function (rooms) {
+                that.rooms = rooms;
+            });
+        },
+
+        changeRoom: function changeRoom(roomId) {
+            var that = this;
+            this.room = roomId;
+            that.loadMessages();
+            $.post('/users/set_room', { _token: this.token, room: roomId }).done(function () {
+                that.scrollBottom();
+            });
+        },
+
+        removeRoom: function removeRoom(roomId) {
+            var that = this;
+            $.post('/rooms/' + roomId, { _token: this.token, _method: "DELETE" }).done(function () {
+                socket.emit('deleteRoom', roomId);
+            });
+        },
+
+        setUser: function setUser() {
+            var that = this;
+            $.ajax({
+                url: "/users/get_user",
+                method: 'GET',
+                cache: false
+            }).done(function (user) {
+                that.user = user;
+                socket.emit('register', user);
+            });
+        },
+
+        scrollBottom: function scrollBottom() {
+            var messageBox = this.$els.msgs;
+            $(messageBox).animate({ 'scrollTop': messageBox.scrollHeight }, 'slow');
+        },
+
+        initCloseAlertTriggers: function initCloseAlertTriggers() {
+            setTimeout(function () {
+                $('.fout').click(function () {
+                    $(this).closest('.alert').fadeOut('fast');
                 });
-            } else {
-                alert("Please Add Message.");
-            }
+            }, 300);
         },
-        deleteMessage: function (index, user_id) {
-            // `this` inside methods point to the Vue instance
-            alert('Hello ' + this.name + '!');
+
+        showPrivate: function showPrivate() {
+            this.showPrivateMessages = 1;
+            this.loadMessages();
         },
-        isRead: function (index, user_id) {
-            // `this` inside methods point to the Vue instance
-            alert('Hello ' + this.name + '!');
+
+        hidePrivate: function hidePrivate() {
+            this.showPrivateMessages = 0;
+            this.loadMessages();
+        },
+
+        messageClass: function messageClass(msg) {
+            if (msg.to == this.user.id) return 'privateMsg';
+            if (msg.user_id == this.user.id) return 'myMsg';
+        },
+
+        createRoom: function createRoom() {
+            var that = this;
+            $.post('/rooms', { _token: this.token, title: this.$els.room.value }).done(function (room) {
+                socket.emit('createRoom', room);
+                that.$els.room.value = '';
+            });
         }
+
     }
+
 });

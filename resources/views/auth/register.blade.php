@@ -38,6 +38,76 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label for="address" class="col-md-4 control-label">Address</label>
+
+                            <div class="col-md-6">
+                                <textarea id="textarea" type="email" class="form-control" name="address" value="{{ old('address') }}" required></textarea>
+
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('age') ? ' has-error' : '' }}">
+                            <label for="age" class="col-md-4 control-label">Age</label>
+
+                            <div class="col-md-6">
+                                <input id="age" type="date" class="form-control" name="age" value="{{ old('age') }}" required>
+
+                                @if ($errors->has('age'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('age') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('weight') ? ' has-error' : '' }}">
+                            <label for="weight" class="col-md-4 control-label">weight</label>
+
+                            <div class="col-md-6">
+                                <input id="weight" type="text" class="form-control" name="weight" value="{{ old('weight') }}" required>
+
+                                @if ($errors->has('weight'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('weight') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('height') ? ' has-error' : '' }}">
+                            <label for="height" class="col-md-4 control-label">height</label>
+
+                            <div class="col-md-6">
+                                <input id="height" type="text" class="form-control" name="height" value="{{ old('height') }}" required>
+
+                                @if ($errors->has('height'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('height') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('hair_colour') ? ' has-error' : '' }}">
+                            <label for="hair_colour" class="col-md-4 control-label">hair_colour</label>
+
+                            <div class="col-md-6">
+                                <input id="hair_colour" type="text" class="form-control" name="hair_colour" value="{{ old('hair_colour') }}" required>
+
+                                @if ($errors->has('hair_colour'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('hair_colour') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 

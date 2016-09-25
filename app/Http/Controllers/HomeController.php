@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        \Illuminate\Support\Facades\Redis::publish('rooms', json_encode(['room' => 'default_room']));
         return view('home');
     }
 }
