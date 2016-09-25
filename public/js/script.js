@@ -1,35 +1,11 @@
-// $(function () {
-    var socket = io.connect('http://127.0.0.1:8890');
-    // socket.on('time', function (datas) {
-    //     console.log(datas.toString());
-    // });
-    // socket.on('friendsChat', function (datas) {
-    //     console.log(datas.toString());
-    // });
-    // socket.on('message', function (data) {
-    //     data = jQuery.parseJSON(data);
-    //     // console.log(data);
-    //
-    //     $("#messages").append("<a class='pull-left' href='#'><img class='media-object img-circle' src='http://www.patrasevents.gr/imgsrv/f/100x67/1846394.jpg' /></a>" +
-    //         "<div class='media-body'><strong>" + data.user + ":</strong><p>" + data.message + "</p><br/>" +
-    //         "<small id='info' class='text-muted'>"+ data.datetime +"</small><hr /></div>");
-    //
-    // });
-
-    // $("#send-msg").click('click', function (e) {
-    //     e.preventDefault();
-    //
-    // })
-// })
-
+var socket = io.connect('http://127.0.0.1:8890');
+var session = window.session_id;
 /*begin vue js*/
 Vue.config.delimiters = ['${', '}']
 Vue.http.interceptors.push(function (request, next) {
     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
     next();
 });
-
-var session = window.session_id;
 
 new Vue({
     el: "#appkini",

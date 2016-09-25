@@ -76,6 +76,6 @@
         </div>
     </div>
     <script>
-    {{--window.session_id = "{{ Auth::user()->id }}";--}}
+    window.session_id = "{{ Auth::user()->id }}";
     </script>
 @endsection
