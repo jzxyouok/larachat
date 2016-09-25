@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('weight') ? ' has-error' : '' }}">
-                            <label for="weight" class="col-md-4 control-label">weight</label>
+                            <label for="weight" class="col-md-4 control-label">Weight</label>
 
                             <div class="col-md-6">
                                 <input id="weight" type="text" class="form-control" name="weight" value="{{ old('weight') }}" required>
@@ -81,7 +81,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('height') ? ' has-error' : '' }}">
-                            <label for="height" class="col-md-4 control-label">height</label>
+                            <label for="height" class="col-md-4 control-label">Height</label>
 
                             <div class="col-md-6">
                                 <input id="height" type="text" class="form-control" name="height" value="{{ old('height') }}" required>
@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('hair_colour') ? ' has-error' : '' }}">
-                            <label for="hair_colour" class="col-md-4 control-label">hair_colour</label>
+                            <label for="hair_colour" class="col-md-4 control-label">Hair Colour</label>
 
                             <div class="col-md-6">
                                 <input id="hair_colour" type="text" class="form-control" name="hair_colour" value="{{ old('hair_colour') }}" required>

@@ -14,7 +14,7 @@ class AddRoomIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('room_id', $AI = false, $unsigned = true)->nullable();
+            $table->integer('room_id')->nullable();
         });
     }
 
