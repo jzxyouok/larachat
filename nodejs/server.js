@@ -17,6 +17,7 @@ redisRooms.on('message', function(channel, message){
 });
 
 var users = [];
+
 io.sockets.on('connection', function (socket) {
 
     socket.on("register", function(user) {
