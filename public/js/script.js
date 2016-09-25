@@ -1,6 +1,6 @@
 var socket = io.connect('http://127.0.0.1:8890');
 var session = window.session_id;
-/*begin vue js*/
+
 Vue.config.delimiters = ['${', '}']
 Vue.http.interceptors.push(function (request, next) {
     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
@@ -34,7 +34,11 @@ new Vue({
             if (this.newMessage == "") return;
             var that = this;
 
-            $.post('/messages', { _token: this.token, room_id: this.room, message: this.newMessage }).done(function () {
+            $.post('/messages', {
+                _token: this.token,
+                room_id: this.room,
+                message: this.newMessage
+            }).done(function () {
                 that.newMessage = "";
             });
         },
@@ -58,17 +62,17 @@ new Vue({
             });
 
             socket.on('messageHasBeenDeleted', function (msgId) {
-                var msg = _.findWhere(that.messages, { id: msgId });
+                var msg = _.findWhere(that.messages, {id: msgId});
                 that.messages.$remove(msg);
             });
 
             socket.on('roomHasBeenDeleted', function (roomId) {
-                var room = _.findWhere(that.rooms, { id: roomId });
+                var room = _.findWhere(that.rooms, {id: roomId});
                 that.rooms.$remove(room);
                 if (that.room == roomId) {
                     that.changeRoom(0);
                     that.notifications.push({
-                        author: { name: 'System' },
+                        author: {name: 'System'},
                         message: 'Unfortunately, the room in which you are removed. ' + 'You will be redirected to the default room'
                     });
                     that.initCloseAlertTriggers();
@@ -85,7 +89,7 @@ new Vue({
             $.ajax({
                 url: '/messages',
                 method: 'GET',
-                data: { room: that.room, showPrivate: that.showPrivateMessages },
+                data: {room: that.room, showPrivate: that.showPrivateMessages},
                 cache: false
             }).done(function (messages) {
                 that.messages = messages;
@@ -93,7 +97,7 @@ new Vue({
         },
 
         remove: function remove(msg) {
-            $.post('/messages/' + msg.id, { _token: this.token, _method: 'DELETE' }).done(function () {
+            $.post('/messages/' + msg.id, {_token: this.token, _method: 'DELETE'}).done(function () {
                 socket.emit('delete', msg);
             });
         },
@@ -112,14 +116,14 @@ new Vue({
             var that = this;
             this.room = roomId;
             that.loadMessages();
-            $.post('/users/set_room', { _token: this.token, room: roomId }).done(function () {
+            $.post('/users/set_room', {_token: this.token, room: roomId}).done(function () {
                 that.scrollBottom();
             });
         },
 
         removeRoom: function removeRoom(roomId) {
             var that = this;
-            $.post('/rooms/' + roomId, { _token: this.token, _method: "DELETE" }).done(function () {
+            $.post('/rooms/' + roomId, {_token: this.token, _method: "DELETE"}).done(function () {
                 socket.emit('deleteRoom', roomId);
             });
         },
@@ -138,7 +142,7 @@ new Vue({
 
         scrollBottom: function scrollBottom() {
             var messageBox = this.$els.msgs;
-            $(messageBox).animate({ 'scrollTop': messageBox.scrollHeight }, 'slow');
+            $(messageBox).animate({'scrollTop': messageBox.scrollHeight}, 'slow');
         },
 
         initCloseAlertTriggers: function initCloseAlertTriggers() {
@@ -166,7 +170,7 @@ new Vue({
 
         createRoom: function createRoom() {
             var that = this;
-            $.post('/rooms', { _token: this.token, title: this.$els.room.value }).done(function (room) {
+            $.post('/rooms', {_token: this.token, title: this.$els.room.value}).done(function (room) {
                 socket.emit('createRoom', room);
                 that.$els.room.value = '';
             });

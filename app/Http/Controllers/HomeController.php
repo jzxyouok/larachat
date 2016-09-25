@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use LRedis;
 
 class HomeController extends Controller
 {
@@ -11,6 +12,7 @@ class HomeController extends Controller
      *
      * @return void
      */
+    protected $redis;
     public function __construct()
     {
         $this->middleware('auth');

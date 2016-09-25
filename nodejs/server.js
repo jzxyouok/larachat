@@ -1,8 +1,9 @@
-var server = require('http').Server();
+var app = require('express')();
+var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var Redis = require('ioredis');
-var redisMessenger = new Redis;
-var redisRooms = new Redis;
+var redis = require('redis');
+var redisMessenger = new redis;
+var redisRooms = new redis;
 
 server.listen(8890);
 
